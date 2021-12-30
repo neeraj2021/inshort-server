@@ -27,6 +27,16 @@ route.get("/news", async (req, res) => {
   }
 });
 
+route.get("/news/:id", async (req, res) => {
+  console.log("Call");
+  try {
+    const article = await News.findById(req.params.id);
+    res.send(article);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 route.post("/", async (req, res) => {
   const { title, author, description, url, link, publisher } = req.body;
   if (!title || !author || !description || !url || !link || !publisher) {
